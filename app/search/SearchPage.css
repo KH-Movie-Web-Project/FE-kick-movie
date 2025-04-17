@@ -1,0 +1,26 @@
+.search-container{
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+}
+.search-container > .search-header {
+  margin-left: 71.5%;
+  margin-bottom: 50px;
+}
+.search-container > .search-header > form > select{
+  width: 70px;
+  height: 30px;
+}
+.search-container > .search-main {
+  display: flex;
+  flex-direction: column;
+  margin-left: 310px;
+}
+.search-container > .search-main > .search-selection {
+  position: fixed;
+  top: 150px;
+  left: 30px;
+  border: 1px solid black;
+  height: 330px;
+  width: 250px;
+}

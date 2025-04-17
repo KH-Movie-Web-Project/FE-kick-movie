@@ -1,0 +1,49 @@
+.searchpost-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  height: 190px;
+  border: 1px solid black;
+  margin-top: 30px;
+}
+.searchpost-container > .searchpost-poster {
+  border: 1px solid black;
+  height: 150px;
+  width: 120px;
+  margin-left: 20px;
+}
+.searchpost-container > .searchpost-content {
+  padding-top: 20px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: inherit;
+}
+.searchpost-container > .searchpost-content > .searchpost-title {
+  font-size: 26px;
+  font-weight: 600;
+}
+.searchpost-container > .searchpost-content > .searchpost-date {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 20px;
+}
+.searchpost-container > .searchpost-content > .searchpost-detail{
+  font-size: 16px;
+}
+
+.searchpost-container > .searchpost-score {
+  border: 1px solid black;
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.searchpost-container > .searchpost-score > div {
+  font-size: 32px;
+  font-weight: 800;
+}

@@ -2,16 +2,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 70%;
+  width: 69%;
   height: 190px;
-  border: 1px solid black;
-  margin-top: 30px;
+  border-bottom: 1px solid #ccc;
+}
+.searchpost-container:hover {
+  background-color: #f9f9f9;
+}
+.searchpost-container:hover:first-child {
+  background-color: #f9f9f9;
+  border-radius: 20px 20px 0 0;
 }
 .searchpost-container > .searchpost-poster {
-  border: 1px solid black;
+  margin-left: 20px;
+}
+.searchpost-container > .searchpost-poster >img{
+  border-radius: 5px;
   height: 150px;
   width: 120px;
-  margin-left: 20px;
 }
 .searchpost-container > .searchpost-content {
   padding-top: 20px;
@@ -24,26 +32,60 @@
 .searchpost-container > .searchpost-content > .searchpost-title {
   font-size: 26px;
   font-weight: 600;
+  min-width: 250px;
 }
 .searchpost-container > .searchpost-content > .searchpost-date {
   font-size: 14px;
   color: #999;
   margin-bottom: 20px;
+  font-weight: 400;
+  margin-left: 5px;
 }
 .searchpost-container > .searchpost-content > .searchpost-detail{
+  width: 95%;
   font-size: 16px;
+  font-weight: 400;
+  min-width: 450px;
 }
 
-.searchpost-container > .searchpost-score {
-  border: 1px solid black;
-  width: 60px;
-  height: 60px;
+.searchpost-container > .searchpost-score-green {
+  background-color: rgb(24, 184, 24);
+  border-radius: 5px;
+  width: 65px;
+  min-width: 65px;
+  height: 63px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2px;
+}
+.searchpost-container > .searchpost-score-yellow{
+  background-color: rgb(245, 204, 24);
+  border-radius: 5px;
+  width: 65px;
+  height: 65px;
+  min-width: 65px;
   margin-right: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.searchpost-container > .searchpost-score > div {
+.searchpost-container > .searchpost-score-red{
+  background-color: rgb(233, 59, 59);
+  color: white;
+  border-radius: 5px;
+  width: 65px;
+  height: 65px;
+  min-width: 65px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+.searchpost-container >  div {
   font-size: 32px;
   font-weight: 800;
 }

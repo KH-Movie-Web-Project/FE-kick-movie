@@ -1,0 +1,168 @@
+.movie_section {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    Margin: 3.5rem 0 0 0;
+    padding: 3rem 0 4rem 18rem;
+    background-color: rgb(60, 65, 65);
+    height: 30rem;
+}
+
+.movie_poster {
+    border-radius: 8px; 
+}
+
+.movie_details {
+    width: 980px;
+    height: 500px;
+    display: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: rgb(236, 235, 235);
+}
+
+.movie_title {
+    padding: 0 0 0 1rem;
+    Margin: 0;
+    font-size: 3rem;
+}
+
+#movie_detail_info {
+    padding: 10rem 0 0 1rem;
+}
+
+.movie_info {
+    height: 405px;
+}
+  
+.movie_like {
+    font-size: 3rem;
+    padding: 2rem 0 0 1rem;
+}
+
+.movie_tagline {
+    padding: 2rem 0 0 1rem;
+}
+
+.movie_overview {
+    padding: 0 0 0 1rem;
+    max-height: 120px;
+    overflow-y: auto;
+    line-height: 1.5;
+}
+
+/* 스크롤바 스타일링 */
+.movie_overview::-webkit-scrollbar {
+  width: 8px;
+}
+
+.movie_overview::-webkit-scrollbar-track {
+  background-color: #333;
+  border-radius: 10px;
+}
+
+.movie_overview::-webkit-scrollbar-thumb {
+  background-color: #646363;
+  border-radius: 10px;
+}
+
+.movie_overview::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.trailer_vote_wrapper {
+    display: flex;
+    gap: 40px;
+    padding: 0 20rem;
+    margin-top: 80px;
+    flex-wrap: wrap; 
+  }
+  
+  .trailer_section {
+    flex: 1 1 50%;
+    min-width: 300px;
+    background-color: #f3f3f3;
+    border: 2px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-style: italic;
+    border-radius: 8px;
+  }
+  
+  .vote_stat_wrapper {
+    flex: 1 1 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 300px;
+  }
+  
+  /* 유저 평점 영역 */
+  .vote_average {
+    background-color: #f3f3f3;
+    border: 2px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-style: italic;
+    border-radius: 8px;
+    height: 150px;
+    width: 100%;
+  }
+  
+  /* 영화 상태 영역 */
+  .movie_stat {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .actor_title {
+    padding: 0 0 0 20rem;
+  }
+
+  .actors_list {
+    display: flex;
+    padding: 0 0 0 20rem;
+    height: 1rem;
+  }
+
+  .actor_image {
+    width: 160px;
+    height: 170px;
+    Margin: 0 7px 0 0;
+  }
+  
+  .movie_stat > div {
+    flex: 1 1 40%;
+  }
+  
+  /* 반응형 미디어 쿼리 */
+  @media (max-width: 768px) {
+    .trailer_vote_wrapper {
+      flex-direction: column;
+      padding: 0 2rem;
+    }
+  
+    .trailer_section,
+    .vote_stat_wrapper {
+      flex: 1 1 100%;
+      min-width: 100%;
+    }
+  
+    .movie_stat {
+      flex-direction: column;
+    }
+  
+    .movie_stat > div {
+      flex: 1 1 100%;
+    }
+  }
+  

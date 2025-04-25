@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchPost from "../../components/SearchPost";
 import img1 from "../../public/testimg/post.png";
 import "./SearchPage.css"
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const dummy = [
   {
@@ -160,23 +162,47 @@ const dummy = [
 
 export default function searchPage(){
 
+  const searchParams = useSearchParams();
   const [postCount,setPostCount] = useState(10);
-  const [selectedTag,setSelectedTag] = useState("");
+  const [selectedTag,setSelectedTag] = useState("전체");
   const [sortType,setSortType] = useState("popularity");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [data,setData] = useState([]);
 
-  const sortedDummy = [...dummy].sort((a, b) => {
-    switch (sortType) {
-      case "popularity": return;
-      case "date" : return;
-      case "score" : return (b.score - a.score); 
+  // const sortedData = [...data].sort((a, b) => {
+  //   switch (sortType) {
+  //     case "popularity": return;
+  //     case "date" : return;
+  //     case "score" : return (b.score - a.score); 
+  //   }
+  // });
+
+  useEffect(() => {
+    const query = searchParams.get('query');
+    if (query) {
+      setSearchQuery(query);
     }
-  });
+  }, [searchParams]);
 
-  // const options = [
-  //   { value: 'popularity', label: '인기순' },
-  //   { value: 'date', label: '날짜순' },
-  //   { value: 'score', label: '평점순' }
-  // ];
+  // 2. searchQuery가 바뀌면 fetchSearch 실행
+  useEffect(() => {
+    if (!searchQuery) return;
+
+    console.log("여기까진 옴",searchQuery);
+    async function fetchSearch() {
+      try {
+        const res = await fetch(`http://localhost:8080/open-api/search?query=${searchQuery}`);
+        const json = await res.json();
+        console.log(json);
+        setData(json);
+        
+      } catch (err) {
+        console.error("패치 오류:", err);
+      }
+    }
+    console.log(data.overview);
+    fetchSearch();
+  }, [searchQuery]);
 
   return(<>
     <div className="search-container">
@@ -188,21 +214,28 @@ export default function searchPage(){
               <option value="date">날짜순</option>
               <option value="score">평점순</option>
             </select>
-            {/* <Select options={options} onChange={(e) => } /> */}
           </form>
         </div>
-        {sortedDummy.slice(0, postCount).map((e,i) => (
-          <SearchPost key={i} poster={e.poster} title={e.title} date={e.date} detail={e.detail} score={e.score} />
-        ))}
+        {data.slice(0, postCount).map((e,i) => {
+          const {responseMovieSearch} = e;
+          const {backdrop_path, title, release_date, overview, vote_average } = responseMovieSearch;
+          return(
+          <Link key={i} href="/detail">
+            <SearchPost poster={backdrop_path} title={title} date={release_date} detail={overview} score={(vote_average * 10)} />
+          </Link>
+        )})}
         <div className="search-selection">
           <div className="search-selection-header">
-            <div>할거면 장르로 구현해야 할듯?</div>
+            <div>장르 선택</div>
           </div>  
           <div className="search-selection-main">
             <ul className="">
-              {["영화", "배우", "시리즈", "제작사"].map((tag) => (
+              <li
+                className={`${(selectedTag==="전체")?"search-selection-target":""}`}
+                onClick={()=>{setSelectedTag("전체")}}>전체</li>
+              {["공포", "로맨스", "액션", "코미디"].map((tag) => (
                 <li key={tag} 
-                  className={`${(selectedTag===tag)?"search-selection-target":"search-selection-out"}`}
+                  className={`${(selectedTag===tag)?"search-selection-target":""}`}
                   onClick={()=>{setSelectedTag(tag)}} >
                   {tag}
                 </li>

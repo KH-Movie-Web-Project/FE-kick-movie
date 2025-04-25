@@ -3,7 +3,7 @@ import "./SearchPost.css"
 import Image from "next/image";
 
 export default function SearchPost({poster,title,date,detail,score}){
-  
+  const posterImage = `http://image.tmdb.org/t/p/w185${poster}`
   const previewText = (detail.length > 150)?detail.slice(0, 150) + "...":detail;
   const [color,setColor] = useState("green");
   
@@ -22,7 +22,7 @@ export default function SearchPost({poster,title,date,detail,score}){
   return(<>
     <div className="searchpost-container">
       <div className="searchpost-poster">
-        <Image src={poster} alt="" />
+        <Image src={posterImage} alt="" width={300} height={450} />
       </div>
       <div className="searchpost-content">
         <div className="searchpost-title">

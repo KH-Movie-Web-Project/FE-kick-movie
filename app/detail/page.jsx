@@ -5,13 +5,13 @@ import "./detailpage.css";
 import Image from "next/image";
 
 export default function DetailPage() {
-  const [movieData, setMovieData] = useState(null);
+  const [movieData, setMovieData] = useState();
 
   useEffect(() => {
     const movieId = "22"; // 예시 movieId
     const fetchMovie = async (movieId) => {
       const url = `http://localhost:8080/api/movie?movieId=${movieId}`;
-
+      
       try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -19,7 +19,7 @@ export default function DetailPage() {
         }
 
         const data = await response.json();
-        console.log("영화 데이터:", data); // 디버깅용
+        console.log("영화 데이터:", data);
         setMovieData(data);
       } catch (error) {
         console.error("영화 정보를 불러오지 못했습니다:", error);
@@ -46,7 +46,8 @@ export default function DetailPage() {
           <h1 className="movie_title">{movieData.title}</h1>
           <span id="movie_detail_info">
             <strong>개봉일:</strong> 
-              {movieData.releaseDate}
+            {movieData.releaseDate ? movieData.releaseDate : '정보 없음'}
+
               {/* <strong>장르:</strong> {movieData.genres?.join(", ")} */}
               {/* <strong>러닝타임:</strong> {movieData.runTime}분 */}
           </span>
@@ -58,7 +59,7 @@ export default function DetailPage() {
         </div>
       </div>
 
-      {/* 트레일러, 유저평점영역 */}
+      {/* 영화사진, 유저평점영역 */}
       <div className="trailer_vote_wrapper">
         <div className="trailer_section">
           {/* <div className="trailer_placeholder">{movieData.backDropPath}</div> */}

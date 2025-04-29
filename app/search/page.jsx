@@ -7,167 +7,16 @@ import "./SearchPage.css"
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-const dummy = [
-  {
-    poster:img1,
-    title:"어벤저스: 인피니티 워",
-    date:"2025 03 04",
-    detail:"영화 내용에 대한 간략한 설명 100글자가 넘어간다면 자동으로 자르고 뒤에 ...을 붙여주는 기능 구현 예정 글씨 크기나 사이즈도 세부 조절 필요한 것으로 보임 글씨가 늘어날 경우 스코어 보드에 딱 붙어버리는 문제 발생 역시 수정해야 함 영화 내용에 대한 간략한 설명 100글자가 넘어간다면 자동으로 자르고 뒤에 ...을 붙여주는 기능 구현 예정 글씨 크기나 사이즈도 세부 조절 필요한 것으로 보임 글씨가 늘어날 경우 스코어 보드에 딱 붙어버리는 문제 발생 역시 수정해야 함",
-    score:67,
-  },
-  {
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:49,
-  },
-  {
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:91,
-  },
-  {
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },
-  {
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },{
-    poster:img1,
-    title:"영화 제목",
-    date:"2025 03 04",
-    detail:"영화 내용",
-    score:"91",
-  },
-
-]
-
 export default function searchPage(){
 
   const searchParams = useSearchParams();
   const [postCount,setPostCount] = useState(10);
-  const [selectedTag,setSelectedTag] = useState("전체");
+  const [selectedTag,setSelectedTag] = useState("");
   const [sortType,setSortType] = useState("popularity");
   const [searchQuery, setSearchQuery] = useState('');
   const [data,setData] = useState([]);
+  const [sortedData, setSortedData] = useState([]);
+  const [uniqueGenres,setUniqueGenres] = useState([]);
 
   // const sortedData = [...data].sort((a, b) => {
   //   switch (sortType) {
@@ -183,6 +32,37 @@ export default function searchPage(){
       setSearchQuery(query);
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    const genreSet = new Set();
+  
+    data.forEach(item => {
+      item.genreDTOList.forEach(genre => {
+        genreSet.add(genre.name);  
+      });
+    });
+    const uniqueGenres = Array.from(genreSet);
+    setUniqueGenres(uniqueGenres);
+    console.log("장르정보",uniqueGenres);
+    
+  }, [data]);  // data가 변경될 때마다 실행
+
+  useEffect(() => {
+    const sortedArray = [...data]; // data 배열을 복사
+    console.log(sortedArray);
+    if (data.length > 0) { // data가 비어있지 않으면
+      if (sortType === 'popularity') {
+        sortedArray.sort((a, b) => b.responseMovieSearch.popularity - a.responseMovieSearch.popularity);
+      } else if (sortType === 'date') {
+        sortedArray.sort((a, b) => new Date(b.responseMovieSearch.release_date) - new Date(a.responseMovieSearch.release_date));
+      } else if (sortType === 'score') {
+        sortedArray.sort((a, b) => b.responseMovieSearch.vote_average - a.responseMovieSearch.vote_average);
+      }
+  
+      setSortedData(sortedArray); // 정렬된 데이터를 sortedData로 설정
+    }
+  }, [sortType, data]);
+
 
   // 2. searchQuery가 바뀌면 fetchSearch 실행
   useEffect(() => {
@@ -204,6 +84,7 @@ export default function searchPage(){
     fetchSearch();
   }, [searchQuery]);
 
+
   return(<>
     <div className="search-container">
       <div className="search-main">
@@ -216,12 +97,14 @@ export default function searchPage(){
             </select>
           </form>
         </div>
-        {data.slice(0, postCount).map((e,i) => {
+        {sortedData.filter((e) => {if (selectedTag === "") 
+          {return true;}return e.genreDTOList.some((genre) => genre.name === selectedTag);})
+          .slice(0, postCount).map((e,i) => {
           const {responseMovieSearch} = e;
-          const {backdrop_path, title, release_date, overview, vote_average } = responseMovieSearch;
+          const {movieId,poster_path, title, release_date, overview, vote_average } = responseMovieSearch;
           return(
-          <Link key={i} href="/detail">
-            <SearchPost poster={backdrop_path} title={title} date={release_date} detail={overview} score={(vote_average * 10)} />
+          <Link key={i} href={`/detail?query=${movieId}`}>
+            <SearchPost poster={poster_path} title={title} date={release_date} detail={overview} score={(vote_average * 10)} />
           </Link>
         )})}
         <div className="search-selection">
@@ -231,20 +114,30 @@ export default function searchPage(){
           <div className="search-selection-main">
             <ul className="">
               <li
-                className={`${(selectedTag==="전체")?"search-selection-target":""}`}
-                onClick={()=>{setSelectedTag("전체")}}>전체</li>
-              {["공포", "로맨스", "액션", "코미디"].map((tag) => (
-                <li key={tag} 
-                  className={`${(selectedTag===tag)?"search-selection-target":""}`}
-                  onClick={()=>{setSelectedTag(tag)}} >
-                  {tag}
-                </li>
-              ))}
+                className={`${(selectedTag==="")?"search-selection-target":""}`}
+                onClick={()=>{setSelectedTag("");setPostCount(10)}}>전체</li>
+              {uniqueGenres.length === 0 ? (
+                <li>정보 없음</li>
+                ) : (
+                uniqueGenres.map((tag) => (
+                  <li
+                    key={tag}
+                    className={`${selectedTag === tag ? "search-selection-target" : ""}`}
+                    onClick={() => {
+                      if(tag === "") return setSelectedTag("");
+                      setSelectedTag(tag);
+                      setPostCount(10);
+                      console.log(postCount)}}>
+                    {tag}
+                  </li>
+                ))
+              )}
             </ul>
           </div>
         </div>
         <div className="search-button">
-        <button onClick={()=>setPostCount(prev => prev + 10)}>더보기</button>
+        {(((sortedData.filter((e) => {if (selectedTag === "") 
+          {return true;}return e.genreDTOList.some((genre) => genre.name === selectedTag);}).length + 10) - postCount) <= 10)?"":(<button onClick={()=>setPostCount(prev => prev + 10)}>더보기</button>)}
         </div>
       </div>
     </div>

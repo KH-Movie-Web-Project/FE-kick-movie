@@ -14,7 +14,7 @@
   transition: transform 0.3s ease;
 }
 .search-container > .search-main > a:hover{
-  transform: translateX(5px);
+  transform: translateX(3px);
 }
 .search-container > .search-main > .search-form {
   margin-top: 80px;
@@ -31,11 +31,11 @@
   position: fixed;
   top: 150px;
   left: 50px;
-  height: 330px;
   width: 250px;
   border: 1px solid #ccc;
   border-top: none;
   border-radius: 10px;
+  padding-bottom: 15px;
 }
 .search-container > .search-main > .search-selection > .search-selection-header{
   height: 50px;
@@ -47,8 +47,6 @@
   font-size: 20px;
   font-weight: 600;
   color: #f3f3f3;
-}
-.search-container > .search-main > .search-selection > .search-selection-main > ul{
 }
 .search-container > .search-main > .search-selection > .search-selection-main > ul > li{
   height: 45px; 
@@ -62,6 +60,7 @@
 .search-container > .search-main > .search-selection > .search-selection-main > ul > .search-selection-target{
   background-color: #3f519b;
   color: white;
+  border: 1px solid #3f519b;
 }
 .search-container .search-main >.search-button > button{
   width: 69%;

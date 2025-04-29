@@ -1,15 +1,24 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useRef } from "react";
 
 import "./detailpage.css";
-import Image from "next/image";
 
 export default function DetailPage() {
+  const searchParams = useSearchParams();
+  const movieId = searchParams.get("movieId");
+
   const [movieDetail, setMovieDetail] = useState();
   const [actors, setActors] = useState([]);
 
+  const [visibleCount, setVisibleCount] = useState(10);
+  const [showMoreButton, setShowMoreButton] = useState(false);
+  const actorListRef = useRef(null);
+
   useEffect(() => {
-    const movieId = "1726"; // 예시 movieId
+    if (!movieId) return;
+
     const fetchMovie = async (movieId) => {
       const url = `http://localhost:8080/api/movie?movieId=${movieId}`;
       
@@ -31,6 +40,27 @@ export default function DetailPage() {
     fetchMovie(movieId);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = actorListRef.current;
+      if (el && el.scrollLeft + el.clientWidth >= el.scrollWidth - 20) {
+        setShowMoreButton(true);
+      }
+    };
+  
+    const el = actorListRef.current;
+    if (el) el.addEventListener("scroll", handleScroll);
+  
+    return () => {
+      if (el) el.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleMoreActors = () => {
+    setVisibleCount((prev) => prev + 10);
+    setShowMoreButton(false);
+  };
+
   if (!movieDetail) return <div>로딩 중...</div>;
 
   return (
@@ -40,39 +70,69 @@ export default function DetailPage() {
         {/* 포스터 */}
         <img
           className="movie_poster"
-          // src={`http://image.tmdb.org/t/p/w185/${movieData.posterPath}`}
+          src={`http://image.tmdb.org/t/p/w342/${movieDetail.posterPath}`}
         />
 
         {/* 영화 정보 영역 */}
         <div className="movie_details">
           <h1 className="movie_title">{movieDetail.title}</h1>
-          <span id="movie_detail_info">
-            <strong>개봉일:</strong> 
-            {movieDetail.releaseDate ? movieDetail.releaseDate : '정보 없음'}
 
-              {/* <strong>장르:</strong> {movieData.genres?.join(", ")} */}
-              {/* <strong>러닝타임:</strong> {movieData.runTime}분 */}
-          </span>
+          <div id="movie_detail_info">
+            <strong id="release">개봉일: {movieDetail.releaseDate}</strong>
+            
+            <strong id="genre">장르:</strong>
+            {movieDetail.genres?.map((genre, index) => (
+              <strong key={index}>
+                <strong id="genre-item">{genre.name}</strong>
+                {index < movieDetail.genres.length - 1 && ", "}
+              </strong>
+            ))}
+            
+            <strong id="runtime">러닝타임: {movieDetail.runtime}분</strong> 
+          </div>
 
           <div className="movie_info">
-            <div className="movie_like">❤</div>
             <div className="movie_overview">{movieDetail.overview}</div>
           </div>
+          <div className="movie_cast_preview">
+          <h3 id="actor-main">출연진</h3>
+            <div className="cast_scroll">
+              {actors.slice(0, 10).map((actor, index) => (
+                <div key={index} className="actor_item">
+                  <img
+                    // height={300}
+                    // width={200}
+                    src={`http://image.tmdb.org/t/p/w185/${actor.profilePath}`}
+                    alt={actor.name}
+                    className="actor_image"
+                  />
+                  <span id="actor_name">{actor.name}</span>
+                  <span id="actor_character">({actor.character})</span>
+                </div>
+              ))}
+            </div>
+        </div>
         </div>
       </div>
 
       {/* 영화사진, 유저평점영역 */}
       <div className="trailer_vote_wrapper">
         <div className="trailer_section">
-          {/* <div className="trailer_placeholder">{movieData.backDropPath}</div> */}
+          <img 
+            className="trailer_placeholder"
+            src={`http://image.tmdb.org/t/p/original/${movieDetail.backdropPath}`}
+          />
         </div>
 
         {/* 유저평점 평균 영역 */}
         <div className="vote_stat_wrapper">
           <div className="vote_average">
             <h2>
-              {movieDetail.voteAverage} / {movieDetail.voteCount}명
+              {movieDetail.voteAverage}
             </h2>
+            <div>
+              {movieDetail.voteCount}명
+            </div>
           </div>
 
           {/* 영화 상태표시 영역 */}
@@ -98,19 +158,27 @@ export default function DetailPage() {
       </div>
 
       {/* 배우 목록 */}
-      <h2 className="actor_title">출연진</h2>
-      <div className="actors_list">
-        {movieDetail.actors?.map((actor, index) => (
+      <h2 className="actor_title">출연진 상세정보</h2>
+      <div className="actors_list" ref={actorListRef}>
+        {actors.slice(0, visibleCount).map((actor, index) => (
+
           <div key={index} className="actor_item">
-            <Image height={300} width={300}
-              src={`http://image.tmdb.org/t/p/w185/${actor.profilePath}`}
+            <img
+              // height={300} width={300}
+              src={actor.profilePath ? `https://image.tmdb.org/t/p/w200${actor.profilePath}` : '/icons/default-image.jpg'}
               alt={actor.name}
               className="actor_image"
             />
-            <p id="actor_name">{actor.name}</p>
-            <p id="actor_character">({actor.character})</p>
+            <span id="actor_name">{actor.name}</span>
+            <span id="actor_character">({actor.character})</span>
           </div>
         ))}
+
+        {showMoreButton && visibleCount < actors.length && (
+          <div className="actor-item more button" onClick={handleMoreActors}>
+            <div className="more-button-inner">+ 더보기</div>
+          </div>
+        )}
       </div>
     </>
   );

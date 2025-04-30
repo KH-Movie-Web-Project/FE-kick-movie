@@ -8,12 +8,10 @@ import "./detailpage.css";
 export default function DetailPage() {
   const searchParams = useSearchParams();
   const movieId = searchParams.get("movieId");
-
   const [movieDetail, setMovieDetail] = useState();
   const [actors, setActors] = useState([]);
-
-  const [visibleCount, setVisibleCount] = useState(10);
-  const [showMoreButton, setShowMoreButton] = useState(false);
+  const [imageCount, setImageCount] = useState(10);
+  const [circleColor, setCircleColor] = useState();
   const actorListRef = useRef(null);
 
   useEffect(() => {
@@ -41,25 +39,14 @@ export default function DetailPage() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const el = actorListRef.current;
-      if (el && el.scrollLeft + el.clientWidth >= el.scrollWidth - 20) {
-        setShowMoreButton(true);
-      }
-    };
-  
-    const el = actorListRef.current;
-    if (el) el.addEventListener("scroll", handleScroll);
-  
-    return () => {
-      if (el) el.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const handleMoreActors = () => {
-    setVisibleCount((prev) => prev + 10);
-    setShowMoreButton(false);
-  };
+    if(movieDetail && movieDetail.voteAverage > 2) {
+      setCircleColor("red")
+    } if(movieDetail && movieDetail.voteAverage > 5) {
+      setCircleColor("yellow")
+    } if(movieDetail && movieDetail.voteAverage > 8) {
+      setCircleColor("green")
+    } 
+  })
 
   if (!movieDetail) return <div>로딩 중...</div>;
 
@@ -127,10 +114,14 @@ export default function DetailPage() {
         {/* 유저평점 평균 영역 */}
         <div className="vote_stat_wrapper">
           <div className="vote_average">
-            <h2>
-              {movieDetail.voteAverage}
-            </h2>
-            <div>
+            <div className="box">
+              <p className="text_average">평균평점</p>
+              <p className="text_count">투표 수</p>
+            </div>
+            <div className={`vote_circle_${circleColor}`}>
+                <span className="vote_text">{movieDetail.voteAverage}</span>
+            </div>
+            <div className="vote_count">
               {movieDetail.voteCount}명
             </div>
           </div>
@@ -160,7 +151,7 @@ export default function DetailPage() {
       {/* 배우 목록 */}
       <h2 className="actor_title">출연진 상세정보</h2>
       <div className="actors_list" ref={actorListRef}>
-        {actors.slice(0, visibleCount).map((actor, index) => (
+        {actors.slice(0, imageCount).map((actor, index) => (
 
           <div key={index} className="actor_item">
             <img
@@ -173,12 +164,14 @@ export default function DetailPage() {
             <span id="actor_character">({actor.character})</span>
           </div>
         ))}
-
-        {showMoreButton && visibleCount < actors.length && (
-          <div className="actor-item more button" onClick={handleMoreActors}>
-            <div className="more-button-inner">+ 더보기</div>
-          </div>
-        )}
+        <button 
+          onClick={() => {
+            setImageCount(prev => prev + 10)
+            console.log(imageCount)
+          }}
+          className="imageAdd">
+            + 더보기
+        </button>
       </div>
     </>
   );

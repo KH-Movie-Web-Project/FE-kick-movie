@@ -115,15 +115,70 @@
 
 .vote_average {
   background-color: #f3f3f3;
-  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #999;
+  height: 140px;
+  width: 100%;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+}
+  
+
+.vote_circle_green {
+  background-color: greenyellow;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #999;
-  font-style: italic;
-  border-radius: 8px;
-  height: 140px;
-  width: 100%;
+  Margin-left: 2rem;
+}
+.vote_circle_red {
+  background-color: red;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  Margin-left: 2rem;
+}
+.vote_circle_yellow {
+  background-color: yellow;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  Margin-left: 2rem;
+}
+
+.vote_text {
+  font-size: 2.8rem;
+  color: black;
+}
+
+.vote_count {
+  margin-left: 2rem;
+  font-size: 2.5rem;
+  color: black;
+}
+
+.text_average {
+  Margin-left: 2rem;
+  font-size: 1rem;
+  display: flex;
+}
+
+.text_count {
+  Margin-left: 2rem;
 }
 
 .actor_title {
@@ -133,7 +188,7 @@
 .actors_list {
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  gap: 25px;
   width: 100%;
   max-width: 1200px;
   overflow-x: auto;

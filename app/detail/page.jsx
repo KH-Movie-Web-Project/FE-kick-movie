@@ -7,7 +7,7 @@ import "./detailpage.css";
 
 export default function DetailPage() {
   const searchParams = useSearchParams();
-  const movieId = searchParams.get("movieId");
+  const movieId = searchParams.get("query");
   const [movieDetail, setMovieDetail] = useState();
   const [actors, setActors] = useState([]);
   const [imageCount, setImageCount] = useState(10);
@@ -36,7 +36,7 @@ export default function DetailPage() {
     };
 
     fetchMovie(movieId);
-  }, []);
+  }, [movieId]);
 
   useEffect(() => {
     if(movieDetail && movieDetail.voteAverage > 2) {

@@ -45,6 +45,7 @@ export default function DetailPage() {
       setCircleColor("yellow")
     } if(movieDetail && movieDetail.voteAverage > 8) {
       setCircleColor("green")
+      
     } 
   })
 

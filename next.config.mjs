@@ -1,5 +1,6 @@
+// next.config.mjs
 export default {
-    images: {
-      domains: ['image.tmdb.org'],
-    },
-  };
+  images: {
+    domains: ['image.tmdb.org'],
+  },
+}

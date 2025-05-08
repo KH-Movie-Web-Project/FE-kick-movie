@@ -1,42 +1,34 @@
 "use client";
 import './mainpage.css'
 import ImageCircle from './imagecircle'
-import Tutorial from './Tutorial'
-import { useEffect, useState } from 'react'
-
+import { useState } from 'react'
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
 
-  const [showTutorial, setShowTutorial] = useState(false);
   const [sortType, setSortType] = useState("최신순");
 
   const handleSortChange = (e) => {
     setSortType(e.target.value);
   }
-
-  useEffect(()=>{
-    const shown = localStorage.getItem('tutorialShown');
-    if(!shown){
-      setShowTutorial(true);
-    }
-  }, []);
-  
+  const router= useRouter();
 
   return (<>
-  {
-    showTutorial && (
-      <Tutorial targetSelector={".search_form"}
-      onClose={() => setShowTutorial(false)}
-      />
-    )
-  }
     <fieldset className='search'>
       <form action="">
         <div><h2 className='welcome'>환영합니다</h2></div>
         <div className='welcome2'>당신이 찾는 그 영화! Kick-Movie에서 만나보세요</div>
         <div className='search-wrapper'>
-        <input className='search_form' type="text" placeholder='영화,배우 검색.....' />
-        <button type="submit" className='search-button'>🔍</button>
+        <input className='search_form' type="text" placeholder='영화,배우 검색.....'  
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+          const data = e.target.value;
+          console.log("작동완료",data);
+          router.push(`/search?query=${data}`)}
+        }}
+        />
+        
         </div>
       </form>
     </fieldset>
@@ -67,7 +59,6 @@ export default function Page() {
             <td >
               <h2 className="blank2">지금 바로 가입하시고 놀라운 혜택을 누려보세요!</h2>
               <p className="blank2">당신이 저희 사이트에 방문하신다면 올해 최고의 선택이라고 확신하는 날이 올거라고 믿어 의심치않습니다!</p>
-              
             </td>
           </tr>
         </tbody>

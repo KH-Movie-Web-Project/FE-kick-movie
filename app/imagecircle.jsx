@@ -63,7 +63,6 @@ const ImageCircle = ({ sortType}) => {
   return (
     <section className="section1-container">
 
-      {/* 왼쪽: 2줄로 나누어진 6개 이미지 */}
       <section className="slide-left">
         <div className="slide-grid">
           {leftImages.map((img, idx) => (
@@ -75,7 +74,7 @@ const ImageCircle = ({ sortType}) => {
         </div>
       </section>
 
-      {/* 오른쪽: 큰 이미지 슬라이드 */}
+      
       <section className="slide-right">
       {rightImages.length > 0 && rightImages[currentIndex] ? (
         <div className="slide-preview">
@@ -88,18 +87,6 @@ const ImageCircle = ({ sortType}) => {
         </div>
       ) : (<p>로딩중</p>)}
 
-        {/* 하단 썸네일 스크롤
-        <div className="scroll">
-          {rightImages.map((img, idx) => (
-            <img
-              key={idx}
-              src={img.src}
-              alt={`thumb-${idx}`}
-              className={`scroll-img ${idx === currentIndex ? 'active' : ''}`}
-              onClick={() => setCurrentIndex(idx)}
-            />
-          ))}
-        </div> */}
       </section>
 
     </section>

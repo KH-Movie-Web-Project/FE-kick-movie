@@ -10,7 +10,6 @@ export default function RootLayout({ children }) {
     <>
       <MainHeader />
       <Suspense fallback={<div>검색 결과 로딩 중...</div>}>{children}</Suspense>
-      <Navigation />
     </>
   );
 }

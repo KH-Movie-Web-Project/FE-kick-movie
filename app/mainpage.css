@@ -84,23 +84,13 @@
 
 /* 이미지 빙글 */
 .submit_benefit{
-    margin-top: 200px;
     background-color: purple;  
-}
-.blank{
-    width: 33%;
+    height: 200px;
 }
 .blank2{
+    color: white;
+    font-size: 30px;
     text-align: center;
-    color: white;
-}
-
-.blank3{
-    width: 33%;
-}
-
-.benefit_list{
-    color: white;
-    justify-items: right;
-    
+    margin-top: 35px;
+    margin-left: 270px;
 }

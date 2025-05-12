@@ -62,15 +62,12 @@ export default function DetailPage() {
 
   return (
     <>
-      {/* 영화 상세정보 영역 */}
       <div className="movie_section">
-        {/* 포스터 */}
         <img
           className="movie_poster"
           src={`http://image.tmdb.org/t/p/w342/${movieDetail.posterPath}`}
         />
 
-        {/* 영화 정보 영역 */}
         <div className="movie_details">
           <h1 className="movie_title">{movieDetail.title}</h1>
 
@@ -104,8 +101,6 @@ export default function DetailPage() {
               {actors.slice(0, 10).map((actor, index) => (
                 <div key={index} className="actor_item">
                   <img
-                    // height={300}
-                    // width={200}
                     src={`http://image.tmdb.org/t/p/w185/${actor.profilePath}`}
                     alt={actor.name}
                     className="actor_image"
@@ -119,7 +114,6 @@ export default function DetailPage() {
       </div>
     </div>
 
-      {/* 영화사진, 유저평점영역 */}
       <div className="trailer_vote_wrapper">
         <div className="trailer_section">
           <img 
@@ -128,7 +122,6 @@ export default function DetailPage() {
           />
         </div>
 
-        {/* 유저평점 평균 영역 */}
         <div className="vote_stat_wrapper">
           <div className="vote_average">
             <div className="box">
@@ -143,7 +136,6 @@ export default function DetailPage() {
             </div>
           </div>
 
-          {/* 영화 상태표시 영역 */}
           <div className="movie_stat">
             <div className="original_title">
               <h3>원래제목</h3>
@@ -165,7 +157,6 @@ export default function DetailPage() {
         </div>
       </div>
 
-      {/* 배우 목록 */}
       <div className="actors_wrapper">
         <h2 className="actor_title">출연진 상세정보</h2>
         <div className="actors_list" ref={actorListRef}>
@@ -173,7 +164,6 @@ export default function DetailPage() {
 
             <div key={index} className="actor_item">
               <img
-                // height={300} width={300}
                 src={actor.profilePath ? `https://image.tmdb.org/t/p/w200${actor.profilePath}` : '/icons/default-image.jpg'}
                 alt={actor.name}
                 className="actor_image"

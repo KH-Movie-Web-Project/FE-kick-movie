@@ -32,25 +32,13 @@
     padding: 0 50px 0 20px;
     
 }
-.search-button{
-    position: absolute;
-  right: 413px;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 35px;
-  width: 55px;
-  background-color: rgb(30 213 169);
-  border: none;
-  border-radius: 2ch;
-  cursor: pointer;
-  font-size: 16px;
-}
+
   /* 검색창 */
 .main-div{
     display: flex;
     height: 1300px;
     width: 3000px;
-    background-image: url(../public/mainpageimage/image\ 36\ \(2\).svg);
+    background-image: url(../public/mainpageimage/posterBackgroundImage.svg);
     
 }
 .form{
@@ -96,23 +84,13 @@
 
 /* 이미지 빙글 */
 .submit_benefit{
-    margin-top: 200px;
     background-color: purple;  
-}
-.blank{
-    width: 33%;
+    height: 200px;
 }
 .blank2{
+    color: white;
+    font-size: 30px;
     text-align: center;
-    color: white;
-}
-
-.blank3{
-    width: 33%;
-}
-
-.benefit_list{
-    color: white;
-    justify-items: right;
-    
+    margin-top: 35px;
+    margin-left: 270px;
 }

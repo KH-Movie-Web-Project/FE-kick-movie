@@ -1,7 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import { useRef } from "react";
 
 import "./detailpage.css";
 
@@ -13,6 +12,12 @@ export default function DetailPage() {
   const [imageCount, setImageCount] = useState(10);
   const [circleColor, setCircleColor] = useState();
   const actorListRef = useRef(null);
+
+  const scrollToActors = () => {
+    if (actorListRef.current) {
+      actorListRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     if (!movieId) return;
@@ -37,6 +42,10 @@ export default function DetailPage() {
 
     fetchMovie(movieId);
   }, [movieId]);
+
+  const handleLoadMoreActors = () => {
+    setImageCount(prev => prev + 10); // 10명씩 배우 리스트 늘리기
+  };
 
   useEffect(() => {
     if(movieDetail && movieDetail.voteAverage > 2) {
@@ -83,7 +92,14 @@ export default function DetailPage() {
             <div className="movie_overview">{movieDetail.overview}</div>
           </div>
           <div className="movie_cast_preview">
+          <div className="actor_header_row">
           <h3 id="actor-main">출연진</h3>
+          <div style={{ marginTop: "1rem", textAlign: "center" }}>
+              <button onClick={scrollToActors} className="scroll_more_button">
+                출연진 상세보기 ↓
+              </button>
+            </div>
+            </div>
             <div className="cast_scroll">
               {actors.slice(0, 10).map((actor, index) => (
                 <div key={index} className="actor_item">
@@ -100,8 +116,8 @@ export default function DetailPage() {
               ))}
             </div>
         </div>
-        </div>
       </div>
+    </div>
 
       {/* 영화사진, 유저평점영역 */}
       <div className="trailer_vote_wrapper">
@@ -120,7 +136,7 @@ export default function DetailPage() {
               <p className="text_count">투표 수</p>
             </div>
             <div className={`vote_circle_${circleColor}`}>
-                <span className="vote_text">{movieDetail.voteAverage}</span>
+                <span className="vote_text">{Math.floor(movieDetail.voteAverage* 10)}</span>
             </div>
             <div className="vote_count">
               {movieDetail.voteCount}명
@@ -150,29 +166,28 @@ export default function DetailPage() {
       </div>
 
       {/* 배우 목록 */}
-      <h2 className="actor_title">출연진 상세정보</h2>
-      <div className="actors_list" ref={actorListRef}>
-        {actors.slice(0, imageCount).map((actor, index) => (
+      <div className="actors_wrapper">
+        <h2 className="actor_title">출연진 상세정보</h2>
+        <div className="actors_list" ref={actorListRef}>
+          {actors.slice(0, imageCount).map((actor, index) => (
 
-          <div key={index} className="actor_item">
-            <img
-              // height={300} width={300}
-              src={actor.profilePath ? `https://image.tmdb.org/t/p/w200${actor.profilePath}` : '/icons/default-image.jpg'}
-              alt={actor.name}
-              className="actor_image"
-            />
-            <span id="actor_name">{actor.name}</span>
-            <span id="actor_character">({actor.character})</span>
+            <div key={index} className="actor_item">
+              <img
+                // height={300} width={300}
+                src={actor.profilePath ? `https://image.tmdb.org/t/p/w200${actor.profilePath}` : '/icons/default-image.jpg'}
+                alt={actor.name}
+                className="actor_image"
+              />
+              <span id="actor_name">{actor.name}</span>
+              <span id="actor_character">({actor.character})</span>
+            </div>
+          ))}
+          <div className="actor_more_wrapper">
+            <button className="actor_more_button" onClick={handleLoadMoreActors}>
+              더보기 &gt;
+            </button>
           </div>
-        ))}
-        <button 
-          onClick={() => {
-            setImageCount(prev => prev + 10)
-            console.log(imageCount)
-          }}
-          className="imageAdd">
-            + 더보기
-        </button>
+        </div>
       </div>
     </>
   );

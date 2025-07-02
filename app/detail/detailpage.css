@@ -1,0 +1,412 @@
+.movie_section {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin: 3.5rem 0 0 0;
+  padding: 3rem 0 4rem 18rem;
+  background-color: rgb(60, 65, 65);
+  height: auto;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.movie_poster {
+  border-radius: 8px;
+  padding-top: 1rem;
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-left: 0;
+}
+
+.movie_details {
+  flex: 1;
+  min-width: 600px;
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: rgb(236, 235, 235);
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.movie_title {
+  padding: 0 0 0 1rem;
+  margin-bottom: 10px;
+  font-size: 2.1rem;
+}
+
+#genre {
+  padding-right: 5px;
+}
+
+#genre-item {
+  padding-right: 5px;
+}
+
+#release {
+  padding-right: 1rem;
+}
+
+#runtime {
+  padding-left: 1rem;
+}
+
+#movie_detail_info {
+  padding: 0 0 0 1rem;
+}
+
+.movie_info {
+  height: 100px;
+  padding: 1rem 0 0 0;
+}
+
+.movie_overview {
+  padding: 0 0 0 1rem;
+  margin-bottom: 10px;
+  max-height: 120px;
+  overflow-y: auto;
+  line-height: 1.5;
+}
+
+.movie_overview::-webkit-scrollbar {
+  width: 8px;
+}
+
+.movie_overview::-webkit-scrollbar-track {
+  background-color: #333;
+  border-radius: 10px;
+}
+
+.movie_overview::-webkit-scrollbar-thumb {
+  background-color: #646363;
+  border-radius: 10px;
+}
+
+.movie_overview::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.trailer_vote_wrapper {
+  display: flex;
+  gap: 40px;
+  padding: 0 20rem;
+  margin-top: 80px;
+  flex-wrap: wrap;
+}
+
+.trailer_section {
+  flex: 1 1 56%;
+  min-width: 300px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vote_stat_wrapper {
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 300px;
+}
+
+.vote_average {
+  background-color: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #999;
+  height: 140px;
+  width: 100%;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+}
+
+.vote_circle_green {
+  background-color: greenyellow;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2rem;
+}
+
+.vote_circle_red {
+  background-color: red;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2rem;
+}
+
+.vote_circle_yellow {
+  background-color: yellow;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2rem;
+}
+
+.vote_text {
+  font-size: 2.8rem;
+  color: black;
+}
+
+.vote_count {
+  margin-left: 2rem;
+  font-size: 2.5rem;
+  color: black;
+}
+
+.text_average {
+  margin-left: 2rem;
+  font-size: 1rem;
+  display: flex;
+}
+
+.text_count {
+  margin-left: 2rem;
+}
+
+.actors_wrapper {
+  padding: 0 20rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+}
+
+.actor_main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.actors_list {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  height: auto;
+  box-sizing: border-box;
+  padding-bottom: 1rem;
+  width: 100%;
+}
+
+.actor_item {
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actor_image {
+  width: 160px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.actor-name {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.actor-character {
+  font-size: 0.1rem;
+  color: #666;
+  margin-top: 5px;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word; 
+  width: 160px;
+  line-height: 1.3;
+}
+
+#actor-main {
+  font-size: 1.5rem;
+  margin: 18px 0 0 0;
+}
+
+.movie_cast_preview {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.cast_scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.actor_header_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
+  margin-top: 1rem;
+}
+
+#actor-main {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.scroll_more_button {
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  background-color: #666;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.scroll_more_button:hover {
+  background-color: #444;
+}
+
+.cast_scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.cast_scroll::-webkit-scrollbar-thumb {
+  background-color: #666;
+  border-radius: 8px;
+}
+
+.movie_stat {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.movie_stat > div {
+  flex: 1 1 40%;
+}
+
+.trailer_placeholder {
+  width: 100%;
+}
+
+.actor_more_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem 1rem 0;
+}
+
+.actor_more_button {
+  background: none;
+  padding-bottom: 50px;
+  width: 70px;
+  border: none;
+  color: #666;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.actor_more_button:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  .movie_section {
+    flex-direction: column;
+    padding: 2rem;
+    align-items: center;
+  }
+
+  .movie_poster {
+    width: 200px;
+    height: auto;
+  }
+
+  .movie_details {
+    min-width: auto;
+    max-width: 100%;
+    padding: 1rem 0;
+  }
+
+  .movie_title,
+  #movie_detail_info,
+  .movie_like,
+  .movie_tagline,
+  .movie_overview {
+    padding-left: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .trailer_vote_wrapper {
+    padding: 0 1rem;
+    flex-direction: column;
+  }
+
+  .actors_wrapper {
+    padding: 0 2rem;
+    overflow-x: auto;
+  }
+
+  .actors_list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 1rem 0;
+    width: 100%;
+  }
+
+  .actor_image {
+    width: 120px;
+    height: 160px;
+  }
+
+  .actor_item {
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 600px) {
+  .movie_poster {
+    width: 160px;
+  }
+
+  .actor_image {
+    width: 100px;
+    height: 140px;
+  }
+
+  .actor_item {
+    min-width: 100px;
+  }
+
+  .movie_title {
+    font-size: 1.5rem;
+  }
+}

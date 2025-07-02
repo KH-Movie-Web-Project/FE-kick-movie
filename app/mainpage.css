@@ -1,0 +1,96 @@
+.search{
+    background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20200713/pngtree-dark-night-starry-sky-background-image_353637.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    margin-bottom: 60px;
+    height: 300px;
+}
+.welcome{
+    font-size: 50px;
+    margin-top: 60px;
+    margin-left: 370px;
+    margin-bottom: 60px;
+    color: yellow;
+}
+.welcome2{
+    margin-left: 375px;
+    color: yellow;
+    margin-bottom: 10px;
+}
+.search-wrapper{
+    position: relative;
+    
+}
+.search_form{
+    width: 1000px;
+    height: 35px;
+    border-radius: 2ch;
+    margin-left: 370px;
+    font-size: 16px;
+    padding: 0 50px 0 20px;
+    
+}
+
+  /* 검색창 */
+.main-div{
+    display: flex;
+    height: 1300px;
+    width: 3000px;
+    background-image: url(../public/mainpageimage/posterBackgroundImage.svg);
+    
+}
+.form{
+    width: 2400px;
+    height: 100px;
+  }
+.custom-flex {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-left: 600px;
+    margin-bottom: 60px;
+}
+  .result{
+    display: flex;
+    border: 1px solid gray;
+     font-weight: bold;
+     width: 316px;
+     height: 40px;
+     border-radius: 2ch;
+     align-items: center;
+     justify-content: center;
+     gap: 10px;
+     padding: 0;
+     background-color: #fafafa;
+     text-align: center;
+     align-items: center;
+     justify-content: center;
+   }
+.sort2{
+      border: 1px solid gray;
+      font-weight: bold;
+      width: 318px;
+      height: 42px;
+      border-radius: 2.5ch;
+      padding-left: 10px;
+      text-align: center;
+      background-color: #fafafa;
+      
+    
+}
+/* 정렬기준 */
+
+/* 이미지 빙글 */
+.submit_benefit{
+    background-color: purple;  
+    height: 200px;
+}
+.blank2{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 35px;
+    margin-left: 270px;
+}
